@@ -429,7 +429,9 @@ public class BoardControllerImpl  implements BoardController{
 	multipartRequest.setCharacterEncoding("utf-8");
 	String imageFileName=null;
 	
+	// 일반 데이터 + 다중 이미지 포함할 박스.
 	Map articleMap = new HashMap();
+	// 일반데이터 , 가져와서, 박스에 담는 작업.
 	Enumeration enu=multipartRequest.getParameterNames();
 	while(enu.hasMoreElements()){
 		String name=(String)enu.nextElement();
@@ -441,11 +443,16 @@ public class BoardControllerImpl  implements BoardController{
 	HttpSession session = multipartRequest.getSession();
 	MemberVO memberVO = (MemberVO) session.getAttribute("member");
 	String id = memberVO.getId();
+	
+	// 박스에, 회원의 아이디 추가. 
 	articleMap.put("id",id);
 	
-	
+	//멀티 이미지를 업로드 하는 메서드. 
+	// 여러 이미지의 이름을 담은 리스트가 반환. 
+	// 물리 저장소에 이미지를 업로드함. 
 	List<String> fileList =multiUpload(multipartRequest);
 	
+	// 설명하기.
 	List<ImageVO> imageFileList = new ArrayList<ImageVO>();
 	if(fileList!= null && fileList.size()!=0) {
 		for(String fileName : fileList) {
@@ -552,20 +559,33 @@ public class BoardControllerImpl  implements BoardController{
 	
 	//미디어 저장소, 이미지 파일 올리기. 다중이미지
 	private List<String> multiUpload(MultipartHttpServletRequest multipartRequest) throws Exception{
+		// 여러 이미지 파일 이름을 담는 박스 
 		List<String> fileList= new ArrayList<String>();
+		// 멀티 파트에 담겨진 이미지 파일들을 가져오는 로직.
 		Iterator<String> fileNames = multipartRequest.getFileNames();
+		// 여러 이미지를 반복문을 이용해서, 원본 이름을 가져오고, 실제 물리 저장소 저장 
 		while(fileNames.hasNext()){
+			// file1 의 이름에 담겨진 , 파일 이미지 값을 조회
 			String fileName = fileNames.next();
+			// file1 작업 하기위한 인스턴스
 			MultipartFile mFile = multipartRequest.getFile(fileName);
+			// file1의 원본 이름을 가져오기.
 			String originalFileName=mFile.getOriginalFilename();
+			// file1 에 담겨진 원본 이름을 임시 박스에(fileList) 담기. 
 			fileList.add(originalFileName);
+			// 실제 물리 저장소에 저장될 이미지 파일. 
 			File file = new File(ARTICLE_IMAGE_REPO +"\\"+ fileName);
+			// 이미지 있다면(크기가 0이 아니면)
 			if(mFile.getSize()!=0){ //File Null Check
-				if(! file.exists()){ //��λ� ������ �������� ���� ���
-					if(file.getParentFile().mkdirs()){ //��ο� �ش��ϴ� ���丮���� ����
-							file.createNewFile(); //���� ���� ����
+				// 파일 존재안하면
+				if(! file.exists()){ 
+					//  파일의 부모 폴더 만들고
+					if(file.getParentFile().mkdirs()){
+						// 해당 파일도 만들기. 
+							file.createNewFile(); 
 					}
 				}
+				// 임시 폴더 , temp에 저장후, 원래 경로로 이동할 예정. 
 				mFile.transferTo(new File(ARTICLE_IMAGE_REPO +"\\"+"temp"+ "\\"+originalFileName)); //�ӽ÷� ����� multipartFile�� ���� ���Ϸ� ����
 			}
 		}
