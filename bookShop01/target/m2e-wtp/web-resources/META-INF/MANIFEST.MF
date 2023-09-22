@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: leebs
 Build-Jdk: 10.0.2
+=======
+Built-By: it
+Build-Jdk: 11.0.19
+>>>>>>> branch 'sdoTest' of https://github.com/eastok/Spring-Legacy-.git
 Created-By: Maven Integration for Eclipse
 

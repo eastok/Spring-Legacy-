@@ -10,6 +10,10 @@ public class ViewNameInterceptor extends  HandlerInterceptorAdapter{
 	   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler){
 		   try {
 			String viewName = getViewName(request);
+<<<<<<< HEAD
+=======
+			
+>>>>>>> branch 'sdoTest' of https://github.com/eastok/Spring-Legacy-.git
 			request.setAttribute("viewName", viewName);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -66,7 +66,11 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 		HttpSession session=request.getSession();
 		session.setAttribute("isLogOn", false);
 		session.removeAttribute("memberInfo");
+<<<<<<< HEAD
 		//로그아웃하면 quickGoodsList삭제
+=======
+		// 최근 본 상품 목록도, 로그아웃 하면 한번 날려보자. 
+>>>>>>> branch 'sdoTest' of https://github.com/eastok/Spring-Legacy-.git
 		session.removeAttribute("quickGoodsList");
 		mav.setViewName("redirect:/main/main.do");
 		return mav;

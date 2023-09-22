@@ -25,6 +25,7 @@ import com.bookshop01.member.vo.MemberVO;
 public class AdminMemberControllerImpl extends BaseController  implements AdminMemberController{
 	@Autowired
 	AdminMemberService adminMemberService;
+<<<<<<< HEAD
 	//여기에 *
 	@RequestMapping(value="/adminMemberMain.do" ,method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView adminGoodsMain(@RequestParam Map<String, String> dateMap,
@@ -56,6 +57,54 @@ public class AdminMemberControllerImpl extends BaseController  implements AdminM
 		condMap.put("beginDate",beginDate);
 		condMap.put("endDate", endDate);
 		ArrayList<MemberVO> member_list=adminMemberService.listMember(condMap);
+=======
+	
+	@RequestMapping(value="/adminMemberMain.do" ,method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView adminGoodsMain(@RequestParam Map<String, String> dateMap,
+			                           HttpServletRequest request, HttpServletResponse response)  throws Exception{
+		String viewName=(String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+
+		String fixedSearchPeriod = dateMap.get("fixedSearchPeriod");
+		String section = dateMap.get("section");
+		String pageNum = dateMap.get("pageNum");
+		String beginDate=null,endDate=null;
+		
+		// 여기에 날짜가 null 이면 자동으로 생성해줌
+		String [] tempDate=calcSearchPeriod(fixedSearchPeriod).split(",");
+		beginDate=tempDate[0];
+		endDate=tempDate[1];
+	
+		
+		System.out.println("calcSearchPeriod 후 beginDate : "+ beginDate);
+		System.out.println("calcSearchPeriod 후  endDate : "+ endDate);
+		
+		
+		dateMap.put("beginDate", beginDate);
+		dateMap.put("endDate", endDate);
+		
+		
+		HashMap<String,Object> condMap=new HashMap<String,Object>();
+		if(section== null) {
+			section = "1";
+		}
+		condMap.put("section",section);
+		if(pageNum== null) {
+			pageNum = "1";
+		}
+		condMap.put("pageNum",pageNum);
+		// 추가. 
+		condMap.put("section",section);
+		condMap.put("beginDate",beginDate);
+		condMap.put("endDate", endDate);
+		System.out.println("beginDate : "+ beginDate);
+		System.out.println("endDate : "+ endDate);
+		System.out.println("section : "+ section);
+		System.out.println("pageNum : "+ pageNum);
+		// 동네2 , 외주. 
+		ArrayList<MemberVO> member_list=adminMemberService.listMember(condMap);
+		
+>>>>>>> branch 'sdoTest' of https://github.com/eastok/Spring-Legacy-.git
 		mav.addObject("member_list", member_list);
 		
 		String beginDate1[]=beginDate.split("-");

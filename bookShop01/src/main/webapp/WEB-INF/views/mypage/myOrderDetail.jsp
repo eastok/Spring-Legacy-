@@ -163,7 +163,11 @@
 		<br>
 		<br> 
 		<a href="${contextPath}/main/main.do"> 
+<<<<<<< HEAD
 		   <IMG width="75" alt="" src="${contextPath}/resources/image/btn_shopping_continue.jpg">
+=======
+		   <IMG width="75" alt="" src="${contextPath}/resources/image/btn_shoping_continue.jpg">
+>>>>>>> branch 'sdoTest' of https://github.com/eastok/Spring-Legacy-.git
 		</a>
 <div class="clear"></div>		
 	

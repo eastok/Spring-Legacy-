@@ -24,11 +24,21 @@ public class MainController extends BaseController {
 	@Autowired
 	private GoodsService goodsService;
 
+<<<<<<< HEAD
 	@RequestMapping(value={"/","/main.do","/main/main.do"} ,method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		HttpSession session;
 		ModelAndView mav=new ModelAndView();
 		String viewName=(String)request.getAttribute("viewName");
+=======
+	@RequestMapping(value= {"/","/main.do","/main/main.do"} ,method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session;
+		ModelAndView mav=new ModelAndView();
+		
+		String viewName=(String)request.getAttribute("viewName");
+		System.out.println("viewName 컨트롤러 도달 전 뷰이름 가져오기 : " +viewName );
+>>>>>>> branch 'sdoTest' of https://github.com/eastok/Spring-Legacy-.git
 		mav.setViewName(viewName);
 		
 		session=request.getSession();

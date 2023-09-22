@@ -61,6 +61,22 @@
        obj.submit();
      }
      
+     function submit1(obj){
+    	 var shouldDelete = confirm("정말 수정 할까요?");
+		  if (shouldDelete){
+         obj.action="${contextPath}/board/modArticle.do";
+         obj.submit();
+       }
+     }
+     
+     function submit2(obj){
+    	 var shouldDelete = confirm("정말 사진 업로드 할까요?");
+		  if (shouldDelete){
+         obj.action="${contextPath}/board/onlyImageUpload.do";
+         obj.submit();
+       }
+     }
+     
   
      /* 추가2 */
      function fn_addFile(){
@@ -126,10 +142,46 @@
 	    <input type=text value="<fmt:formatDate value="${article.writeDate}" />" readOnly />
 	   </td>   
   </tr>
+   <!-- 다중 이미지 출력 부분 -->
+ <c:if test="${not empty imageFileList && imageFileList!='null' }">
+	  <c:forEach var="item" items="${imageFileList}" varStatus="status" >
+		    <tr>
+			    <td width="150" align="center" bgcolor="#FF9933"  rowspan="2">
+			      이미지${status.count }
+			   </td>
+			   <td>
+			     <input  type= "hidden"   name="originalFileName" value="${item.imageFileName }" />
+			    <img src="${contextPath}/download.do?articleNO=${article.articleNO}&imageFileName=${item.imageFileName}" id="preview"  /><br>
+			    <a href="${contextPath}/board/deleteImage.do?imageFileNO=${item.imageFileNO}&articleNO=${article.articleNO}&imageFileName=${item.imageFileName}"  class="no-underline">삭제</a><br>
+			    
+			   </td>   
+			  </tr>  
+			  <tr>
+			    <td>
+			    <!--    <input  type="file"  name="imageFileName " id="i_imageFileName"   disabled   onchange="readURL(this);"   /> -->
+			    </td>
+			 </tr>
+		</c:forEach>
+ </c:if>
+ 
+ 
+ 
+ </table>
+ <input type=button value="수정반영하기" onClick="submit1(frmArticle)" >
+  <input type=button value="취소"  onClick="backToList(frmArticle)">
+ </form>
+ 
+ <!-- 이미지 파일 추가 부분 분리 -->
+ <form name="onlyImageUpload" method="post"  action="${contextPath}/board/onlyImageUpload.do"  enctype="multipart/form-data">
+ <table  border=0  align="center">
   <tr>
+  <td align="center"> <input type="button" value="사진올리기"  onClick="submit2(onlyImageUpload)"/></td>
+      <input type="hidden" name="articleNO" value="${article.articleNO}"  />
 			  <td align="right">이미지파일 첨부:  </td>
+			  
 			  <!-- 추가3 -->
 			  <td align="left"> <input type="button" value="파일 추가" onClick="fn_addFile()"/></td>
+			  
 			  <!-- <td> <input type="file" name="imageFileName"  onchange="readURL(this);" /></td> -->
 			  <!-- <td><img  id="preview" src="#"   width=200 height=200/></td> -->
 			  
@@ -141,11 +193,8 @@
 	      <!-- 첨부된 이미지를 불러오는 영역 -->
 	       <td colspan="4"><div id="previews"></div></td>
 	   </tr>
- 
- 
- </table>
- <input type=submit value="수정반영하기" >
-  <input type=button value="취소"  onClick="backToList(frmArticle)">
- </form>
+  </table>
+  </form>
+  
 </body>
 </html>

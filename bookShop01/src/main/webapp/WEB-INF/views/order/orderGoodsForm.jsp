@@ -859,7 +859,11 @@ function fn_process_pay_order(){
 		<br> <a href="javascript:fn_show_order_detail();"> 
 		<img width="125" alt="" src="${contextPath}/resources/image/btn_gulje.jpg">
 		</a> <a href="${contextPath}/main/main.do"> 
+<<<<<<< HEAD
 		   <img width="75" alt="" src="${contextPath}/resources/image/btn_shopping_continue.jpg">
+=======
+		   <img width="75" alt="" src="${contextPath}/resources/image/btn_shoping_continue.jpg">
+>>>>>>> branch 'sdoTest' of https://github.com/eastok/Spring-Legacy-.git
 		</a>
 	
 <div class="clear"></div>		

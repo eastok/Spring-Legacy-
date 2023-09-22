@@ -64,6 +64,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		if(pageNum== null) {
 			pageNum = "1";
 		}
+<<<<<<< HEAD
 		condMap.put("section",section);
 		condMap.put("pageNum",pageNum);
 		condMap.put("beginDate",beginDate);
@@ -72,6 +73,11 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		System.out.println("pageNum : " + pageNum);
 		System.out.println("beginDate : " + beginDate);
 		System.out.println("endDate : " + endDate);
+=======
+		condMap.put("pageNum",pageNum);
+		condMap.put("beginDate",beginDate);
+		condMap.put("endDate", endDate);
+>>>>>>> branch 'sdoTest' of https://github.com/eastok/Spring-Legacy-.git
 		List<GoodsVO> newGoodsList=adminGoodsService.listNewGoods(condMap);
 		mav.addObject("newGoodsList", newGoodsList);
 		

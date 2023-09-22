@@ -328,7 +328,11 @@ function fn_order_all_cart_goods(){
 		 	<img width="75" alt="" src="${contextPath}/resources/image/btn_order_final.jpg">
 		 </a>
 		 <a href="#">
+<<<<<<< HEAD
 		 	<img width="75" alt="" src="${contextPath}/resources/image/btn_shopping_continue.jpg">
+=======
+		 	<img width="75" alt="" src="${contextPath}/resources/image/btn_shoping_continue.jpg">
+>>>>>>> branch 'sdoTest' of https://github.com/eastok/Spring-Legacy-.git
 		 </a>
 	<center>
 </form>	

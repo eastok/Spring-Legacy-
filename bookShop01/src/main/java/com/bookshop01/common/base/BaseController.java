@@ -41,6 +41,7 @@ public abstract class BaseController  {
 			
 			File file = new File(CURR_IMAGE_REPO_PATH +"\\"+ fileName);
 			if(mFile.getSize()!=0){ //File Null Check
+<<<<<<< HEAD
 				if(! file.exists()){ //°æ·Î»ó¿¡ ÆÄÀÏÀÌ Á¸ÀçÇÏÁö ¾ÊÀ» °æ¿ì
 					if(file.getParentFile().mkdirs()){ //°æ·Î¿¡ ÇØ´çÇÏ´Â µð·ºÅä¸®µéÀ» »ý¼º
 							file.createNewFile(); //ÀÌÈÄ ÆÄÀÏ »ý¼º
@@ -104,6 +105,71 @@ public abstract class BaseController  {
 		}
 		
 		beginYear   = Integer.toString(cal.get(Calendar.YEAR));
+=======
+				if(! file.exists()){ //ï¿½ï¿½Î»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+					if(file.getParentFile().mkdirs()){ //ï¿½ï¿½Î¿ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ä¸®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+							file.createNewFile(); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+					}
+				}
+				mFile.transferTo(new File(CURR_IMAGE_REPO_PATH +"\\"+"temp"+ "\\"+originalFileName)); //ï¿½Ó½Ã·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ multipartFileï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½
+			}
+		}
+		return fileList;
+	}
+	
+	private void deleteFile(String fileName) {
+		File file =new File(CURR_IMAGE_REPO_PATH+"\\"+fileName);
+		try{
+			file.delete();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@RequestMapping(value="/*.do" ,method={RequestMethod.POST,RequestMethod.GET})
+	protected  ModelAndView viewForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName=(String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		return mav;
+	}
+	
+	
+	protected String calcSearchPeriod(String fixedSearchPeriod){
+		String beginDate=null;
+		String endDate=null;
+		String endYear=null;
+		String endMonth=null;
+		String endDay=null;
+		String beginYear=null;
+		String beginMonth=null;
+		String beginDay=null;
+		DecimalFormat df = new DecimalFormat("00");
+		Calendar cal=Calendar.getInstance();
+		
+		endYear   = Integer.toString(cal.get(Calendar.YEAR));
+		endMonth  = df.format(cal.get(Calendar.MONTH) + 1);
+		endDay   = df.format(cal.get(Calendar.DATE));
+		endDate = endYear +"-"+ endMonth +"-"+endDay;
+		
+		if(fixedSearchPeriod == null) {
+			cal.add(cal.MONTH,-4);
+		}else if(fixedSearchPeriod.equals("one_week")) {
+			cal.add(Calendar.DAY_OF_YEAR, -7);
+		}else if(fixedSearchPeriod.equals("two_week")) {
+			cal.add(Calendar.DAY_OF_YEAR, -14);
+		}else if(fixedSearchPeriod.equals("one_month")) {
+			cal.add(cal.MONTH,-1);
+		}else if(fixedSearchPeriod.equals("two_month")) {
+			cal.add(cal.MONTH,-2);
+		}else if(fixedSearchPeriod.equals("three_month")) {
+			cal.add(cal.MONTH,-3);
+		}else if(fixedSearchPeriod.equals("four_month")) {
+			cal.add(cal.MONTH,-4);
+		}
+		
+		beginYear   = Integer.toString(cal.get(Calendar.YEAR)-6);
+>>>>>>> branch 'sdoTest' of https://github.com/eastok/Spring-Legacy-.git
 		beginMonth  = df.format(cal.get(Calendar.MONTH) + 1);
 		beginDay   = df.format(cal.get(Calendar.DATE));
 		beginDate = beginYear +"-"+ beginMonth +"-"+beginDay;
